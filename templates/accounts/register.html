@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block body_block %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="jumbotron">
+	{% if registered %}
+		<h1>Thanks for registering!</h1>
+	      <a  href="{% url 'index' %}"><button class="btn btn-primary">Home</button></a>
+	{% elif user.is_active %}
+		<h1>Thanks! You are already registered</h1>
+	      <a  href="{% url 'index' %}"><button class="btn btn-primary">Back</button></a>
+	{% else %}
+	<form style="text-align:center; width:100%;" method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
+	<h1 style="text-align: center">Register</h1>
+        <h3 style="text-align: center">Fill your data here. Don't worry, not even admin could see your password. Password is hashed using PBKDF2 algorithm and SHA256 hash</h3>
+		{% csrf_token %}
+		    {{ user_form | crispy }}
+		    {{ profile_form | crispy }}
+	<button type='submit' value='register' class='btn btn-primary'>Register</button>
+	</form>
+	{% endif %}
+	</div>
+</div>
+{% endblock %}

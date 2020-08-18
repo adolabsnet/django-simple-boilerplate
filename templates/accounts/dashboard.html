@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block body_block %}
+<div class="container">
+	<div class="jumbotron">
+		{% for data in profile %}
+		<p>Username: {{ data.user }}</p>
+		<p>Name: {{ user.first_name }} {{user.last_name }}</p>
+		<p>Email: {{ user.email }}</p>
+		<p>Country: {{ data.country }}</p>
+		<p>City: {{ data.city }}</p>
+		<p>Phone Number: {{ data.phone_number }}</p>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
